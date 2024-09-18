@@ -21,6 +21,7 @@ export default function Particles({
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const canvasContainerRef = useRef<HTMLDivElement>(null);
 	const context = useRef<CanvasRenderingContext2D | null>(null);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const circles = useRef<any[]>([]);
 	const mousePosition = useMousePosition();
 	const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
