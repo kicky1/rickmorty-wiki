@@ -1,6 +1,6 @@
 export const GET_CHARACTERS_QUERY = `
-  query GetCharacters($name: String, $species: String, $page: Int) {
-    characters(filter: { name: $name, species: $species }, page: $page) {
+  query GetCharacters($name: String, $species: String, $status: String, $type: String, $gender: String, $page: Int) {
+    characters(filter: { name: $name, species: $species, status: $status, type: $type, gender: $gender }, page: $page) {
       results {
         id
         name
@@ -11,6 +11,7 @@ export const GET_CHARACTERS_QUERY = `
           name
         }
         location {
+          id
           name
         }
         image
@@ -21,3 +22,15 @@ export const GET_CHARACTERS_QUERY = `
     }
   }
 `;
+
+
+export const GET_LOCATION_QUERY = `
+  query GetLocation($locationId: ID!) {
+    location(id: $locationId) {
+      id
+      name
+      type
+      dimension
+    }
+  } 
+`

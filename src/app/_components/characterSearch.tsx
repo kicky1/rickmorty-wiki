@@ -9,14 +9,15 @@ import { GET_CHARACTERS_QUERY } from '@/lib/queries'
 import SkeletonCard from './skeletonCard'
 import { type CharactersResult } from '../types/character.type'
 import { CharacterCard } from './characterCard'
+import LocationDialog from './locationDialog'
 
 export default function CharacterSearch() {
   const [searchParams, setSearchParams] = useState({
     name: '',
     species: '',
+    status: '',
+    type: '',
     gender: '',
-    origin: '',
-    location: '',
   })
   const [searchTrigger, setSearchTrigger] = useState(0)
 
@@ -26,9 +27,9 @@ export default function CharacterSearch() {
       const variables = {
         name: searchParams.name || undefined,
         species: searchParams.species || undefined,
+        status: searchParams.status || undefined,
+        type: searchParams.type || undefined,
         gender: searchParams.gender || undefined,
-        origin: searchParams.origin || undefined,
-        location: searchParams.location || undefined,
         page: pageParam || 1,
       }
       return graphQLClient.request<CharactersResult>(GET_CHARACTERS_QUERY, variables)
@@ -75,22 +76,21 @@ export default function CharacterSearch() {
         />
         <Input
           type="text"
-          name="origin"
-          placeholder="Origin"
+          name="type"
+          placeholder="Type"
           className='max-w-[320px] border-2 border-green-500 text-green-300 placeholder:text-green-300 shadow-[1px_1px_5px_rgba(3,138,255,1)]'
-          value={searchParams.origin}
+          value={searchParams.type}
           onChange={handleInputChange}
         />
         <Input
           type="text"
-          name="location"
-          placeholder="Location"
+          name="status"
+          placeholder="Status"
           className='max-w-[320px] border-2 border-green-500 text-green-300 placeholder:text-green-300 shadow-[1px_1px_5px_rgba(3,138,255,1)]'
-          value={searchParams.location}
+          value={searchParams.status}
           onChange={handleInputChange}
         />
       </form>
-
       {isLoading && (
         <div className="grid gap-4 md:grid-cols-2">
           {Array.from({ length: 6 }).map((_, index) => (
@@ -99,7 +99,6 @@ export default function CharacterSearch() {
         </div>
       )}
       {error && <p>Error: {error.message}</p>}
-
       {data && (
         <div className="grid gap-4 md:grid-cols-2">
           {data.pages.map((page) =>

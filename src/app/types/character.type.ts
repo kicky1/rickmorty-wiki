@@ -8,6 +8,7 @@ export type Character = {
       name: string;
     };
     location: {
+      id: string;
       name: string;
     };
     image: string;

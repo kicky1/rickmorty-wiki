@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skull, Heart } from "lucide-react";
 import { type Character } from "../types/character.type";
 import Image from "next/image";
+import LocationDialog from "./locationDialog";
 
 type Props = {
     character: Character
@@ -19,6 +20,7 @@ export function CharacterCard({character}: Props) {
                     <p>Gender: {character.gender}</p>
                     <p>Origin: {character.origin.name}</p>
                     <p>Location: {character.location.name}</p>
+                    <LocationDialog id={character.location.id}/>
                 </div>
                 <div className='col-span-1 justify-self-end'>
                     <Image src={character.image} alt={character.name} width={200} height={200} className='rounded'/>
